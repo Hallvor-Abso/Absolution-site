@@ -150,8 +150,7 @@ body::after {
 
 #bg-canvas {
   position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; opacity: 0.55;
-  filter: hue-rotate(195deg) saturate(1.5) brightness(0.80);
+  pointer-events: none; opacity: 0.65;
 }
 
 /* ── Grain analogique — texture de bruit ── */
