@@ -37,7 +37,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-inner">
 
     <!-- Ligne animée -->
@@ -209,78 +208,6 @@
 </div>
 
 <!-- SCRIPTS -->
-<script>
-/* ── Particules hero ── */
-(function(){
-  var cv = document.getElementById('hero-canvas');
-  if (!cv) return;
-  var ctx = cv.getContext('2d');
-  var pts = [];
-  var N = 55;
-
-  function resize(){
-    cv.width  = cv.offsetWidth;
-    cv.height = cv.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* Initialise les particules */
-  for (var i = 0; i < N; i++) pts.push({
-    x:  Math.random() * cv.width,
-    y:  Math.random() * cv.height,
-    r:  Math.random() * 1.4 + 0.4,
-    vx: (Math.random() - 0.5) * 0.22,
-    vy: (Math.random() - 0.5) * 0.22,
-    op: Math.random() * 0.5 + 0.15,
-    phase: Math.random() * Math.PI * 2
-  });
-
-  var t = 0;
-  function draw(){
-    ctx.clearRect(0, 0, cv.width, cv.height);
-    t += 0.008;
-
-    /* Connexions entre particules proches */
-    for (var i = 0; i < pts.length; i++){
-      for (var j = i + 1; j < pts.length; j++){
-        var dx = pts[i].x - pts[j].x;
-        var dy = pts[i].y - pts[j].y;
-        var d  = Math.sqrt(dx*dx + dy*dy);
-        if (d < 110){
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(27,111,232,' + (0.07 * (1 - d/110)).toFixed(3) + ')';
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    /* Points */
-    for (var i = 0; i < pts.length; i++){
-      var p = pts[i];
-      /* Dérive organique avec sinus */
-      p.x += p.vx + Math.sin(t + p.phase) * 0.12;
-      p.y += p.vy + Math.cos(t + p.phase * 0.7) * 0.10;
-      /* Rebond doux */
-      if (p.x < 0) p.x = cv.width;
-      if (p.x > cv.width) p.x = 0;
-      if (p.y < 0) p.y = cv.height;
-      if (p.y > cv.height) p.y = 0;
-
-      var pulse = p.op * (0.7 + 0.3 * Math.sin(t * 1.2 + p.phase));
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(74,159,255,' + pulse.toFixed(3) + ')';
-      ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
 <script src="config.js"></script>
 <script src="settings.js"></script>
 <script src="shared.js"></script>

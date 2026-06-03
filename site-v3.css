@@ -239,45 +239,67 @@
 .cand-ok-text  { font-size: 0.85rem; color: var(--txt-3); line-height: 1.7; }
 
 /* ══════════════════════════════
-   JEUX
+   JEUX — split screen
 ══════════════════════════════ */
-.games-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--bdr); max-width: 1100px; margin: 0 auto; }
-.game-card  {
-  display: block; text-decoration: none; color: var(--text-primary);
-  background: var(--bg-2); border: none; border-top: 2px solid transparent;
-  padding: 2rem 2.5rem; position: relative; overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+.games-grid {
+  display: flex;
+  min-height: 55vh;
+  width: 100%;
 }
-/* Fissure diagonale cristalline */
-.game-card::before {
-  content: ''; position: absolute; top: 0; right: 0; bottom: 0;
-  width: 1px;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    rgba(27,111,232,0.3) 30%,
-    rgba(0,200,255,0.2) 60%,
-    transparent 100%
-  );
-  pointer-events: none; z-index: 0;
-  transition: opacity var(--transition); opacity: 0;
+.game-card {
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  text-decoration: none; color: var(--text-primary);
+  background: var(--bg-2);
+  padding: 3rem 3.5rem;
+  position: relative; overflow: hidden;
+  border: none;
+  transition: flex 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background 0.4s ease,
+              box-shadow 0.4s ease;
 }
-/* Ligne électrique top */
+
+/* Quand on hover sur la grille : rétrécit les cards non-hovered */
+.games-grid:has(.game-card:hover) .game-card:not(:hover) { flex: 0.60; }
+.games-grid .game-card:hover { flex: 1.40; }
+
+/* Séparateur vertical entre les deux panels */
+.game-card.wow { border-right: 1px solid rgba(255,255,255,0.06); }
+
+/* Ligne électrique en haut — toujours visible */
 .game-card::after {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  transition: opacity var(--transition);
+  transition: opacity 0.4s ease;
 }
-.game-card.wow::after   { background: linear-gradient(90deg, transparent 10%, var(--elec) 50%, var(--cyan) 80%, transparent 100%); opacity: 0.4; }
-.game-card.swtor::after { background: linear-gradient(90deg, transparent 10%, var(--red) 50%, var(--red-light) 80%, transparent 100%); opacity: 0.4; }
-.game-card:hover { transform: translateY(-4px); background: var(--bg-3); color: var(--text-primary); }
-.game-card.wow:hover   { box-shadow: 0 24px 60px rgba(0,0,0,0.8), var(--glow-elec); }
-.game-card.swtor:hover { box-shadow: 0 24px 60px rgba(0,0,0,0.8), var(--glow-red); }
-.game-card:hover::before { opacity: 1; }
+.game-card.wow::after   { background: linear-gradient(90deg, transparent, var(--elec), var(--cyan), transparent); opacity: 0.5; }
+.game-card.swtor::after { background: linear-gradient(90deg, transparent, var(--red), var(--red-light), transparent); opacity: 0.5; }
 .game-card:hover::after  { opacity: 1; }
 
-.game-icon { font-size: 2.5rem; display: block; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+/* Halo de fond — révélé au hover */
+.game-card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  opacity: 0; transition: opacity 0.5s ease; z-index: 0;
+}
+.game-card.wow::before   { background: radial-gradient(ellipse 70% 60% at 30% 80%, rgba(27,159,232,0.12) 0%, transparent 70%); }
+.game-card.swtor::before { background: radial-gradient(ellipse 70% 60% at 70% 80%, rgba(220,38,38,0.10) 0%, transparent 70%); }
+.game-card:hover::before { opacity: 1; }
+
+.game-card.wow:hover   { background: var(--bg-3); box-shadow: inset 0 0 80px rgba(27,159,232,0.06); }
+.game-card.swtor:hover { background: var(--bg-3); box-shadow: inset 0 0 80px rgba(220,38,38,0.06); }
+
+/* Contenu — positionné en bas du panel */
+.game-icon {
+  font-size: 3.5rem; display: block; margin-bottom: 1.75rem;
+  position: relative; z-index: 1;
+  opacity: 0.85; transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.game-card:hover .game-icon { opacity: 1; transform: scale(1.06); }
+
 .game-name {
-  font-family: var(--font); font-size: 1.6rem; font-weight: 900;
-  text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem;
+  font-family: var(--display);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  text-transform: uppercase; letter-spacing: 0.04em;
+  margin-bottom: 0.9rem; line-height: 1.0;
   position: relative; z-index: 1;
 }
 .game-card.wow .game-name {
@@ -288,7 +310,7 @@
   background: linear-gradient(135deg, var(--txt) 20%, var(--red-light) 60%, var(--red) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.game-desc { font-size: 0.88rem; color: var(--txt-3); line-height: 1.7; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+.game-desc { font-size: 0.88rem; color: var(--txt-3); line-height: 1.7; margin-bottom: 1.5rem; position: relative; z-index: 1; max-width: 420px; }
 .game-factions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; position: relative; z-index: 1; }
 .faction { font-family: var(--font); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.25rem 0.75rem; border: 1px solid; }
 .faction.blue { color: var(--elec-light); border-color: rgba(27,111,232,0.35); background: rgba(27,111,232,0.08); }
@@ -339,10 +361,6 @@
   pointer-events: none; z-index: 0;
 }
 .hero::after { display: none; }
-.hero-canvas {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 0; opacity: 0.4;
-}
 .hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
 
 /* Ligne animée */
@@ -636,7 +654,12 @@
   .news-grid { grid-template-columns: 1fr; gap: 0.75rem; background: none; }
   .rec-layout { grid-template-columns: 1fr; }
   .cand-box { position: static; }
-  .games-grid { grid-template-columns: 1fr; gap: 1px; }
+  /* Split screen → empilement vertical sur mobile */
+  .games-grid { flex-direction: column; min-height: unset; }
+  .games-grid:has(.game-card:hover) .game-card:not(:hover) { flex: 1; }
+  .games-grid .game-card:hover { flex: 1; }
+  .game-card { min-height: 40vh; padding: 2.5rem 2rem; justify-content: center; }
+  .game-card.wow { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
   .related-grid { grid-template-columns: 1fr; gap: 0.75rem; }
   .field-row { grid-template-columns: 1fr; }
   .roles-grid { gap: 0.75rem; }

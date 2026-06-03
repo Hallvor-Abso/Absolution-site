@@ -130,48 +130,94 @@
     if (activeEl) activeEl.classList.add('active');
   }
 
-  /* ── Canvas constellation (toutes les pages) ── */
+  /* ── Canvas constellation stellaire (toutes les pages) ── */
   (function () {
     var c = document.getElementById('bg-canvas');
     if (!c) return;
-    /* Sur la homepage le hero-canvas prend en charge les particules :
-       on masque bg-canvas pour éviter deux boucles RAF simultanées. */
-    if (document.getElementById('hero-canvas')) {
-      c.style.display = 'none';
-      return;
-    }
-    var ctx = c.getContext('2d'), pts = [], time = 0;
+    var ctx = c.getContext('2d'), pts = [], t = 0;
+
     function resize() {
       c.width = window.innerWidth; c.height = window.innerHeight; pts = [];
-      var n = Math.max(30, Math.min(70, Math.floor(c.width * c.height / 18000)));
+      var n = Math.max(60, Math.min(110, Math.floor(c.width * c.height / 12000)));
       for (var i = 0; i < n; i++) {
-        pts.push({ x: Math.random() * c.width, y: Math.random() * c.height, vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18, r: Math.random() * .8 + .2, b: Math.random() * .3 + .08, t: Math.random() * Math.PI * 2 });
+        var bright = Math.random() < 0.09;
+        pts.push({
+          x: Math.random() * c.width,
+          y: Math.random() * c.height,
+          vx: (Math.random() - .5) * (bright ? 0.05 : 0.11),
+          vy: (Math.random() - .5) * (bright ? 0.05 : 0.11),
+          r: bright ? Math.random() * 1.0 + 0.8 : Math.random() * 0.55 + 0.15,
+          baseOp: bright ? Math.random() * 0.25 + 0.45 : Math.random() * 0.18 + 0.05,
+          phase: Math.random() * Math.PI * 2,
+          spd: Math.random() * 0.4 + 0.25,
+          bright: bright
+        });
       }
     }
     resize();
-    var D = 120;
+    window.addEventListener('resize', resize);
+
+    var D = 95;
     function draw() {
-      ctx.clearRect(0, 0, c.width, c.height); time += .005;
+      ctx.clearRect(0, 0, c.width, c.height);
+      t += 0.004;
+
+      /* Déplacement + wrap */
       for (var i = 0; i < pts.length; i++) {
-        var p = pts[i]; p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > c.width) p.vx *= -1;
-        if (p.y < 0 || p.y > c.height) p.vy *= -1;
-        p.b = .08 + .15 * Math.sin(time + p.t);
+        var p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = c.width;
+        if (p.x > c.width) p.x = 0;
+        if (p.y < 0) p.y = c.height;
+        if (p.y > c.height) p.y = 0;
       }
+
+      /* Lignes de constellation — étoiles normales seulement */
       for (var i = 0; i < pts.length; i++) {
+        if (pts[i].bright) continue;
         for (var j = i + 1; j < pts.length; j++) {
-          var a = pts[i], b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
-          if (d < D) { ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.strokeStyle = 'rgba(59,130,246,' + ((1 - d / D) * .08) + ')'; ctx.lineWidth = .4; ctx.stroke(); }
+          if (pts[j].bright) continue;
+          var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < D) {
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.strokeStyle = 'rgba(27,159,232,' + ((1 - d / D) * 0.055).toFixed(3) + ')';
+            ctx.lineWidth = 0.3;
+            ctx.stroke();
+          }
         }
       }
+
+      /* Étoiles */
       for (var i = 0; i < pts.length; i++) {
-        var p = pts[i]; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(148,163,184,' + p.b + ')'; ctx.fill();
+        var p = pts[i];
+        var op = p.baseOp * (0.55 + 0.45 * Math.sin(t * p.spd + p.phase));
+        if (p.bright) {
+          /* Halo radial pour les étoiles lumineuses */
+          var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+          g.addColorStop(0, 'rgba(200,232,255,' + op + ')');
+          g.addColorStop(0.35, 'rgba(80,170,255,' + (op * 0.35).toFixed(3) + ')');
+          g.addColorStop(1, 'rgba(27,159,232,0)');
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(230,245,255,' + op + ')';
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(160,210,255,' + op.toFixed(3) + ')';
+          ctx.fill();
+        }
       }
       requestAnimationFrame(draw);
     }
     draw();
-    window.addEventListener('resize', resize);
   })();
 
 })();
