@@ -80,6 +80,12 @@
   style.textContent = css;
   document.head.appendChild(style);
 
+  /* Cache le contenu principal pendant l'intro */
+  document.documentElement.style.setProperty('--intro-body-opacity', '0');
+  var bodyStyle = document.createElement('style');
+  bodyStyle.textContent = 'body > *:not(#abs-intro) { opacity: 0; transition: opacity 0.6s ease; }';
+  document.head.appendChild(bodyStyle);
+
   var overlay = document.createElement('div');
   overlay.id = 'abs-intro';
   overlay.innerHTML =
@@ -88,13 +94,15 @@
     '<div id="abs-intro-sub">Guilde &middot; FR</div>';
   document.body.appendChild(overlay);
 
-  /* Fade out après 1.55s, retrait du DOM à 2.1s */
+  /* Fade out intro + fade in site simultanément */
   setTimeout(function () {
     overlay.classList.add('fade-out');
+    bodyStyle.textContent = 'body > *:not(#abs-intro) { opacity: 1; transition: opacity 0.6s ease; }';
   }, 1550);
 
   setTimeout(function () {
     overlay.remove();
     style.remove();
-  }, 2100);
+    bodyStyle.remove();
+  }, 2200);
 })();
