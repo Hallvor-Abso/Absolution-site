@@ -39,26 +39,31 @@
 <section class="hero">
   <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-inner">
-    <div class="hero-eye fi" id="recruit-status">
-      <span class="hero-eye-badge" id="recruit-wow" data-game="wow" style="display:none;">
-        <span class="hero-eye-dot" id="dot-wow"></span>
-        <span id="label-wow">WoW &mdash; Recrutement ouvert</span>
-      </span>
-      <span class="hero-eye-badge" id="recruit-swtor" data-game="swtor" style="display:none;">
-        <span class="hero-eye-dot" id="dot-swtor"></span>
-        <span id="label-swtor">SWTOR &mdash; Recrutement ouvert</span>
-      </span>
+    <div class="hero-top-row fi">
+      <div class="hero-game">
+        <span class="g-wow" data-game="wow">&#9876;&#65039; World of Warcraft</span>
+        <span class="g-dot" id="hero-dot-sep"></span>
+        <span class="g-swt" data-game="swtor">&#128640; SWTOR</span>
+      </div>
+      <div class="hero-eye" id="recruit-status">
+        <span class="hero-eye-badge" id="recruit-wow" data-game="wow" style="display:none;">
+          <span class="hero-eye-dot" id="dot-wow"></span>
+          <span id="label-wow">WoW &mdash; Recrutement ouvert</span>
+        </span>
+        <span class="hero-eye-badge" id="recruit-swtor" data-game="swtor" style="display:none;">
+          <span class="hero-eye-dot" id="dot-swtor"></span>
+          <span id="label-swtor">SWTOR &mdash; Recrutement ouvert</span>
+        </span>
+      </div>
     </div>
-    <div class="hero-game fi d1">
-      <span class="g-wow" data-game="wow">&#9876;&#65039; World of Warcraft</span>
-      <span class="g-dot" id="hero-dot-sep"></span>
-      <span class="g-swt" data-game="swtor">&#128640; SWTOR</span>
+    <div class="hero-manifesto">
+      <div class="hm-line fi d1">On progresse</div>
+      <div class="hm-line hm-accent fi d2">ensemble.</div>
     </div>
-    <p class="hero-desc fi d2" data-eid="hero-desc">
-      Guilde semi-hardcore francophone. On progresse ensemble,<br>
-      on s&apos;am&eacute;liore ensemble. Z&eacute;ro toxicit&eacute;, cent pour cent investissement.
+    <p class="hero-desc fi d3" data-eid="hero-desc">
+      Guilde semi-hardcore francophone. Z&eacute;ro toxicit&eacute;,<br>cent pour cent investissement.
     </p>
-    <div class="hero-btns fi d3">
+    <div class="hero-btns fi d4">
       <button class="btn btn-primary" onclick="document.getElementById('modal-postuler').style.display='flex'">Postuler &rarr;</button>
       <a href="roster.html" class="btn btn-secondary">Voir le roster</a>
     </div>
