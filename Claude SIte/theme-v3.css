@@ -1,0 +1,250 @@
+﻿/* ═══════════════════════════════════════════════════
+   ABSOLUTION — Theme V3 "FRACTURE"
+   Électrique · Cristallin · Acier · Tranchant
+   Inspiré du logo : noir absolu / bleu foudre / argent
+═══════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap');
+
+:root {
+  /* ── Électrique ── */
+  --elec:             #1B6FE8;
+  --elec-light:       #4A9FFF;
+  --elec-bright:      #7BBFFF;
+  --elec-dim:         #0D3A8A;
+  --cyan:             #00C8FF;
+  --cyan-dim:         #006080;
+
+  /* ── Danger ── */
+  --red:              #E8281B;
+  --red-light:        #FF5A4A;
+  --red-dim:          #7A1510;
+
+  /* ── Acier / Argent ── */
+  --silver:           #B8CCE0;
+  --silver-dim:       #5A7A99;
+  --steel:            #2A3A4E;
+
+  /* ── Success ── */
+  --success:          #0FAF6E;
+  --success-light:    #3DFFB2;
+
+  /* ── Fonds ── */
+  --bg:               #0D1220;
+  --bg-2:             #111830;
+  --bg-3:             #172040;
+  --bg-4:             #1C2848;
+
+  /* ── Textes ── */
+  --txt:              #F0F8FF;
+  --txt-2:            #8ABFE4;
+  --txt-3:            #4A6A88;
+  --txt-4:            #243450;
+
+  /* ── Bordures ── */
+  --bdr:              rgba(27,111,232,0.14);
+  --bdr-elec:         rgba(27,111,232,0.45);
+  --bdr-strong:       rgba(74,159,255,0.6);
+  --bdr-cyan:         rgba(0,200,255,0.35);
+
+  /* ── Typographie ── */
+  --display:          'Bebas Neue', sans-serif;
+  --body:             'Outfit', sans-serif;
+  --font:             'Outfit', sans-serif;
+
+  /* ── Misc ── */
+  --radius:           0px;
+  --nav-h:            60px;
+  --transition:       0.16s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Shadows & Glows ── */
+  --shadow:           0 8px 40px rgba(0,0,0,0.8);
+  --glow-elec:        0 0 28px rgba(27,111,232,0.4);
+  --glow-cyan:        0 0 24px rgba(0,200,255,0.35);
+  --glow-red:         0 0 24px rgba(232,40,27,0.35);
+  --glow-sm:          0 0 12px rgba(27,111,232,0.25);
+
+  /* ── Aliases compatibilité ── */
+  --blue:             #1B6FE8;
+  --blue-light:       #4A9FFF;
+  --blue-dark:        #0D3A8A;
+  --red-light:        #FF5A4A;
+  --violet:           #1B6FE8;
+  --color-primary:    #1B6FE8;
+  --color-secondary:  #E8281B;
+  --color-accent:     #00C8FF;
+  --color-tertiary:   #7BBFFF;
+  --color-success:    #3DFFB2;
+  --bg-base:          #0D1220;
+  --bg-surface:       #111830;
+  --bg-card:          #111830;
+  --bg-card-hover:    #172040;
+  --text-primary:     #F0F8FF;
+  --text-secondary:   #8ABFE4;
+  --text-muted:       #4A6A88;
+  --text-dim:         #182030;
+  --border:           rgba(27,111,232,0.14);
+  --border-strong:    rgba(27,111,232,0.45);
+  --shadow-blue:      0 0 28px rgba(27,111,232,0.4);
+  --shadow-red:       0 0 24px rgba(232,40,27,0.35);
+  --shadow-gold:      0 0 28px rgba(27,111,232,0.4);
+  --shadow-crimson:   0 0 24px rgba(232,40,27,0.35);
+  --gold:             #4A9FFF;
+  --gold-light:       #7BBFFF;
+  --gold-bright:      #B8DCFF;
+  --gold-dim:         #0D3A8A;
+  --crimson:          #E8281B;
+  --crimson-light:    #FF5A4A;
+  --crimson-bright:   #FF8A7A;
+  --cream:            #D8ECFF;
+  --glass-bg:         #080C15;
+  --glass-border:     rgba(27,111,232,0.14);
+  --glass-inset:      inset 0 1px 0 rgba(74,159,255,0.06);
+  --glass-blur:       blur(0px);
+  --ease:             0.16s cubic-bezier(0.4,0,0.2,1);
+  --bdr-gold:         rgba(27,111,232,0.45);
+  --success-light:    #3DFFB2;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Pas de grain / scanlines en V3 ── */
+
+/* ── Glow électrique centré haut ── */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60vw;
+  height: 40vh;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(27,111,232,0.07) 0%,
+    rgba(0,200,255,0.03) 40%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#bg-canvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; opacity: 0.35;
+  filter: hue-rotate(210deg) saturate(1.4) brightness(0.7);
+}
+
+nav, header, main, section, footer, div, article {
+  position: relative; z-index: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.0;
+  color: var(--txt);
+}
+
+a { text-decoration: none; color: inherit; }
+
+p {
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--txt-3);
+  line-height: 1.75;
+}
+
+input, textarea, select {
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--txt);
+  background: var(--bg-3);
+  border: 1px solid var(--bdr);
+  border-radius: 0;
+  padding: 0.65rem 1rem;
+  width: 100%; outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--elec);
+  box-shadow: 0 0 0 2px rgba(27,111,232,0.15), var(--glow-sm);
+}
+::placeholder { color: var(--txt-4); }
+select option { background: var(--bg-3); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(27,111,232,0.4); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--elec); }
+
+/* ── Boutons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--body); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0;
+  border: none; cursor: pointer;
+  transition: all var(--transition); white-space: nowrap;
+  position: relative; overflow: hidden; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+/* Ligne électrique en bas */
+.btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: rgba(255,255,255,0.15); transition: background var(--transition);
+}
+.btn:hover::after { background: rgba(255,255,255,0.3); }
+
+.btn-primary {
+  background: var(--elec);
+  color: #D8ECFF;
+  box-shadow: 0 2px 16px rgba(27,111,232,0.35);
+}
+.btn-primary:hover {
+  background: var(--elec-light);
+  box-shadow: var(--glow-elec);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--red-light);
+  border: 1px solid rgba(232,40,27,0.45);
+}
+.btn-secondary:hover {
+  background: rgba(232,40,27,0.1);
+  border-color: var(--red-light);
+  box-shadow: var(--glow-red);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--txt-2);
+  border: 1px solid var(--bdr);
+}
+.btn-ghost:hover {
+  border-color: var(--bdr-elec);
+  color: var(--txt);
+  background: rgba(27,111,232,0.06);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--elec-light);
+  border: 1px solid var(--bdr-elec);
+}
+.btn-outline:hover {
+  background: rgba(27,111,232,0.1);
+  border-color: var(--elec-light);
+  box-shadow: var(--glow-sm);
+}
+
+
