@@ -58,30 +58,24 @@
   display: block; text-decoration: none; color: var(--text-primary);
   background: var(--bg-2);
   border: 1px solid var(--bdr);
-  border-top: 2px solid rgba(27,111,232,0.3);
+  border-top: 2px solid rgba(14,165,233,0.22);
   padding: 2rem;
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   cursor: pointer; position: relative; overflow: hidden;
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  border-radius: var(--radius);
 }
-/* Coin coupé décoration */
-.card::before {
-  content: '';
-  position: absolute; top: 0; right: 0;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 12px 12px 0 0;
-  border-color: var(--bg-3) transparent transparent transparent;
-  pointer-events: none; z-index: 2;
-}
-/* Ligne électrique gauche */
+.card::before { display: none; }
+/* Ligne accent gauche — toujours visible, s'intensifie au hover */
 .card::after {
   content: '';
   position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-  background: linear-gradient(180deg, var(--elec), transparent 80%);
-  opacity: 0; transition: opacity var(--transition);
+  background: linear-gradient(180deg, var(--elec-dim), transparent 80%);
+  opacity: 0.45; transition: opacity var(--transition), background var(--transition);
 }
-.card:hover::after { opacity: 1; }
+.card:hover::after {
+  opacity: 1;
+  background: linear-gradient(180deg, var(--elec), transparent 80%);
+}
 .card:hover {
   transform: translateY(-4px);
   border-color: var(--bdr-elec);
@@ -90,9 +84,9 @@
   color: var(--text-primary); text-decoration: none;
 }
 
-.card-wow   { border-top-color: rgba(27,111,232,0.5); }
-.card-swtor { border-top-color: rgba(232,40,27,0.5); }
-.card-guild { border-top-color: rgba(74,159,255,0.3); }
+.card-wow   { border-top-color: rgba(14,165,233,0.40); }
+.card-swtor { border-top-color: rgba(220,38,38,0.40); }
+.card-guild { border-top-color: rgba(56,189,248,0.25); }
 .card-wow:hover   { border-top-color: var(--elec); }
 .card-swtor:hover { border-top-color: var(--red-light); }
 
@@ -201,17 +195,13 @@
 
 .role-card {
   background: var(--bg-2); border: 1px solid var(--bdr);
-  border-top: 2px solid rgba(27,111,232,0.35);
+  border-top: 2px solid rgba(14,165,233,0.30);
   padding: 1.25rem;
   position: relative; overflow: hidden;
+  border-radius: var(--radius);
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
-.role-card::before {
-  content: ''; position: absolute; top: 0; right: 0;
-  width: 0; height: 0; border-style: solid;
-  border-width: 10px 10px 0 0;
-  border-color: var(--bg-3) transparent transparent transparent;
-}
+.role-card::before { display: none; }
 .role-card:hover {
   transform: translateY(-2px);
   border-color: var(--bdr-elec); border-top-color: var(--elec);
@@ -318,14 +308,14 @@
 .sec-header { text-align: center; margin-bottom: 3.5rem; position: relative; }
 .sec-eyebrow {
   font-family: var(--font); font-size: 0.55rem; font-weight: 700;
-  letter-spacing: 0.5em; text-transform: uppercase; color: var(--cyan);
+  letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold-light);
   display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 0.65rem;
 }
 .sec-eyebrow::before, .sec-eyebrow::after {
   content: ''; display: inline-block; width: 24px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--elec));
+  background: linear-gradient(90deg, transparent, var(--gold-light));
 }
-.sec-eyebrow::after { background: linear-gradient(90deg, var(--elec), transparent); }
+.sec-eyebrow::after { background: linear-gradient(90deg, var(--gold-light), transparent); }
 .sec-title {
   font-family: var(--font); font-size: clamp(1.8rem,4vw,3rem); font-weight: 900;
   text-transform: uppercase; letter-spacing: 0.05em;
@@ -341,14 +331,14 @@
   text-align: center; padding: calc(var(--nav-h) + 1.75rem) 2rem 2.5rem;
   position: relative; overflow: hidden; min-height: 0;
 }
-/* Halo diffus centré */
+/* Halo atmosphérique centré */
 .hero::before {
-  content: ''; position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
-  width: 900px; height: 600px;
-  background: radial-gradient(ellipse at 50% 30%,
-    rgba(27,111,232,0.14) 0%,
-    rgba(0,200,255,0.06) 40%,
-    transparent 68%);
+  content: ''; position: absolute; top: -15%; left: 50%; transform: translateX(-50%);
+  width: 1100px; height: 720px;
+  background: radial-gradient(ellipse at 50% 28%,
+    rgba(14,165,233,0.13) 0%,
+    rgba(6,182,212,0.05) 42%,
+    transparent 70%);
   pointer-events: none; z-index: 0;
 }
 .hero::after { display: none; }
@@ -434,11 +424,11 @@
   border-bottom: 1px solid var(--bdr);
   background: var(--bg-2); position: relative;
 }
-/* Ligne électrique top */
+/* Ligne prestige top */
 #s-stats::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent 5%, var(--elec) 30%, var(--cyan) 50%, var(--elec) 70%, transparent 95%);
-  opacity: 0.6;
+  background: linear-gradient(90deg, transparent 5%, var(--gold-light) 30%, var(--gold-bright) 50%, var(--gold-light) 70%, transparent 95%);
+  opacity: 0.45;
 }
 #s-stats::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
@@ -532,7 +522,7 @@
   display: flex; flex-direction: column; align-items: center; text-align: center;
   padding: 1.75rem 1rem; text-decoration: none; border: 1px solid;
   background: var(--bg-2); transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  border-radius: var(--radius);
 }
 .modal-choice:hover { transform: translateY(-3px); }
 .wow-choice   { border-color: var(--bdr); }

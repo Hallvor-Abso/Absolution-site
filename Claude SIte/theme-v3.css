@@ -7,45 +7,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap');
 
 :root {
-  /* ── Électrique ── */
-  --elec:             #1B6FE8;
-  --elec-light:       #4A9FFF;
-  --elec-bright:      #7BBFFF;
-  --elec-dim:         #0D3A8A;
-  --cyan:             #00C8FF;
-  --cyan-dim:         #006080;
+  /* ── Primaire — Sky Blue (distinctif, raffiné) ── */
+  --elec:             #0EA5E9;
+  --elec-light:       #38BDF8;
+  --elec-bright:      #7DD3FC;
+  --elec-dim:         #0369A1;
+  --cyan:             #06B6D4;
+  --cyan-dim:         #155E75;
 
-  /* ── Danger ── */
-  --red:              #E8281B;
-  --red-light:        #FF5A4A;
-  --red-dim:          #7A1510;
+  /* ── Prestige — Ambre / Or ── */
+  --gold:             #92400E;
+  --gold-light:       #D97706;
+  --gold-bright:      #F59E0B;
+  --gold-dim:         #451A03;
 
-  /* ── Acier / Argent ── */
-  --silver:           #B8CCE0;
-  --silver-dim:       #5A7A99;
-  --steel:            #2A3A4E;
+  /* ── Danger / SWTOR ── */
+  --red:              #DC2626;
+  --red-light:        #F87171;
+  --red-dim:          #7F1D1D;
+
+  /* ── Acier ── */
+  --silver:           #CBD5E1;
+  --silver-dim:       #64748B;
+  --steel:            #1E3A5F;
 
   /* ── Success ── */
-  --success:          #0FAF6E;
-  --success-light:    #3DFFB2;
+  --success:          #059669;
+  --success-light:    #34D399;
 
-  /* ── Fonds ── */
-  --bg:               #0D1220;
-  --bg-2:             #111830;
-  --bg-3:             #172040;
-  --bg-4:             #1C2848;
+  /* ── Fonds — profonds ── */
+  --bg:               #06080F;
+  --bg-2:             #0B0F1C;
+  --bg-3:             #101828;
+  --bg-4:             #162035;
 
   /* ── Textes ── */
-  --txt:              #F0F8FF;
-  --txt-2:            #8ABFE4;
-  --txt-3:            #4A6A88;
-  --txt-4:            #243450;
+  --txt:              #F0F9FF;
+  --txt-2:            #7DD3FC;
+  --txt-3:            #475569;
+  --txt-4:            #1E2D3D;
 
   /* ── Bordures ── */
-  --bdr:              rgba(27,111,232,0.14);
-  --bdr-elec:         rgba(27,111,232,0.45);
-  --bdr-strong:       rgba(74,159,255,0.6);
-  --bdr-cyan:         rgba(0,200,255,0.35);
+  --bdr:              rgba(14,165,233,0.10);
+  --bdr-elec:         rgba(14,165,233,0.40);
+  --bdr-strong:       rgba(56,189,248,0.50);
+  --bdr-cyan:         rgba(6,182,212,0.28);
 
   /* ── Typographie ── */
   --display:          'Bebas Neue', sans-serif;
@@ -53,57 +59,53 @@
   --font:             'Outfit', sans-serif;
 
   /* ── Misc ── */
-  --radius:           0px;
+  --radius:           2px;
   --nav-h:            60px;
   --transition:       0.16s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ── Shadows & Glows ── */
-  --shadow:           0 8px 40px rgba(0,0,0,0.8);
-  --glow-elec:        0 0 28px rgba(27,111,232,0.4);
-  --glow-cyan:        0 0 24px rgba(0,200,255,0.35);
-  --glow-red:         0 0 24px rgba(232,40,27,0.35);
-  --glow-sm:          0 0 12px rgba(27,111,232,0.25);
+  --shadow:           0 8px 40px rgba(0,0,0,0.85);
+  --glow-elec:        0 0 28px rgba(14,165,233,0.35);
+  --glow-cyan:        0 0 24px rgba(6,182,212,0.28);
+  --glow-red:         0 0 24px rgba(220,38,38,0.28);
+  --glow-sm:          0 0 12px rgba(14,165,233,0.18);
+  --glow-gold:        0 0 24px rgba(217,119,6,0.30);
 
   /* ── Aliases compatibilité ── */
-  --blue:             #1B6FE8;
-  --blue-light:       #4A9FFF;
-  --blue-dark:        #0D3A8A;
-  --red-light:        #FF5A4A;
-  --violet:           #1B6FE8;
-  --color-primary:    #1B6FE8;
-  --color-secondary:  #E8281B;
-  --color-accent:     #00C8FF;
-  --color-tertiary:   #7BBFFF;
-  --color-success:    #3DFFB2;
-  --bg-base:          #0D1220;
-  --bg-surface:       #111830;
-  --bg-card:          #111830;
-  --bg-card-hover:    #172040;
-  --text-primary:     #F0F8FF;
-  --text-secondary:   #8ABFE4;
-  --text-muted:       #4A6A88;
-  --text-dim:         #182030;
-  --border:           rgba(27,111,232,0.14);
-  --border-strong:    rgba(27,111,232,0.45);
-  --shadow-blue:      0 0 28px rgba(27,111,232,0.4);
-  --shadow-red:       0 0 24px rgba(232,40,27,0.35);
-  --shadow-gold:      0 0 28px rgba(27,111,232,0.4);
-  --shadow-crimson:   0 0 24px rgba(232,40,27,0.35);
-  --gold:             #4A9FFF;
-  --gold-light:       #7BBFFF;
-  --gold-bright:      #B8DCFF;
-  --gold-dim:         #0D3A8A;
-  --crimson:          #E8281B;
-  --crimson-light:    #FF5A4A;
-  --crimson-bright:   #FF8A7A;
-  --cream:            #D8ECFF;
-  --glass-bg:         #080C15;
-  --glass-border:     rgba(27,111,232,0.14);
-  --glass-inset:      inset 0 1px 0 rgba(74,159,255,0.06);
+  --blue:             #0EA5E9;
+  --blue-light:       #38BDF8;
+  --blue-dark:        #0369A1;
+  --violet:           #0EA5E9;
+  --color-primary:    #0EA5E9;
+  --color-secondary:  #DC2626;
+  --color-accent:     #06B6D4;
+  --color-tertiary:   #7DD3FC;
+  --color-success:    #34D399;
+  --bg-base:          #06080F;
+  --bg-surface:       #0B0F1C;
+  --bg-card:          #0B0F1C;
+  --bg-card-hover:    #101828;
+  --text-primary:     #F0F9FF;
+  --text-secondary:   #7DD3FC;
+  --text-muted:       #475569;
+  --text-dim:         #0C1828;
+  --border:           rgba(14,165,233,0.10);
+  --border-strong:    rgba(14,165,233,0.40);
+  --shadow-blue:      0 0 28px rgba(14,165,233,0.35);
+  --shadow-red:       0 0 24px rgba(220,38,38,0.28);
+  --shadow-gold:      0 0 28px rgba(217,119,6,0.30);
+  --shadow-crimson:   0 0 24px rgba(220,38,38,0.28);
+  --crimson:          #DC2626;
+  --crimson-light:    #F87171;
+  --crimson-bright:   #FCA5A5;
+  --cream:            #E0F2FE;
+  --glass-bg:         #06080F;
+  --glass-border:     rgba(14,165,233,0.10);
+  --glass-inset:      inset 0 1px 0 rgba(56,189,248,0.05);
   --glass-blur:       blur(0px);
   --ease:             0.16s cubic-bezier(0.4,0,0.2,1);
-  --bdr-gold:         rgba(27,111,232,0.45);
-  --success-light:    #3DFFB2;
+  --bdr-gold:         rgba(217,119,6,0.40);
+  --success-light:    #34D399;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -112,6 +114,9 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--body);
   background: var(--bg);
+  background-image: radial-gradient(circle, rgba(14,165,233,0.032) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
   color: var(--txt);
   min-height: 100vh;
   overflow-x: hidden;
@@ -127,12 +132,12 @@ body::after {
   position: fixed;
   top: 0; left: 50%;
   transform: translateX(-50%);
-  width: 60vw;
-  height: 40vh;
+  width: 75vw;
+  height: 50vh;
   background: radial-gradient(ellipse at 50% 0%,
-    rgba(27,111,232,0.07) 0%,
-    rgba(0,200,255,0.03) 40%,
-    transparent 70%);
+    rgba(14,165,233,0.07) 0%,
+    rgba(6,182,212,0.025) 45%,
+    transparent 72%);
   pointer-events: none;
   z-index: 0;
 }
@@ -193,10 +198,10 @@ select option { background: var(--bg-3); }
   font-family: var(--body); font-size: 0.78rem; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 0.75rem 1.75rem;
-  border-radius: 0;
+  border-radius: var(--radius);
   border: none; cursor: pointer;
   transition: all var(--transition); white-space: nowrap;
-  position: relative; overflow: hidden; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  position: relative; overflow: hidden;
 }
 /* Ligne électrique en bas */
 .btn::after {
@@ -207,8 +212,8 @@ select option { background: var(--bg-3); }
 
 .btn-primary {
   background: var(--elec);
-  color: #D8ECFF;
-  box-shadow: 0 2px 16px rgba(27,111,232,0.35);
+  color: #E0F2FE;
+  box-shadow: 0 2px 16px rgba(14,165,233,0.30);
 }
 .btn-primary:hover {
   background: var(--elec-light);
@@ -218,10 +223,10 @@ select option { background: var(--bg-3); }
 .btn-secondary {
   background: transparent;
   color: var(--red-light);
-  border: 1px solid rgba(232,40,27,0.45);
+  border: 1px solid rgba(220,38,38,0.40);
 }
 .btn-secondary:hover {
-  background: rgba(232,40,27,0.1);
+  background: rgba(220,38,38,0.08);
   border-color: var(--red-light);
   box-shadow: var(--glow-red);
   transform: translateY(-2px);

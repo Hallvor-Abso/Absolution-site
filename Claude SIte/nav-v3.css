@@ -100,9 +100,9 @@ nav::after {
 }
 .nav-auth-btn:hover { color: var(--txt); border-color: var(--bdr-elec); background: rgba(27,111,232,0.06); }
 .nav-auth-btn.primary {
-  background: var(--elec); border-color: var(--elec); color: #D8ECFF;
-  font-weight: 700; box-shadow: 0 0 16px rgba(27,111,232,0.3);
-  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  background: var(--elec); border-color: var(--elec); color: #E0F2FE;
+  font-weight: 700; box-shadow: 0 0 16px rgba(14,165,233,0.25);
+  border-radius: var(--radius);
 }
 .nav-auth-btn.primary:hover { background: var(--elec-light); box-shadow: var(--glow-elec); }
 .nav-auth-btn.admin-btn { background: rgba(27,111,232,0.1); border-color: var(--bdr-elec); color: var(--elec-light); }
@@ -113,7 +113,7 @@ nav::after {
   font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
   padding: 0.42rem 1rem;
   border: none; cursor: pointer; text-decoration: none; transition: background var(--transition);
-  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  border-radius: var(--radius);
 }
 .nav-discord-btn:hover { background: #4752C4; }
 
@@ -157,22 +157,14 @@ nav::after {
 .auth-modal.open { display: flex; }
 .auth-modal-box {
   background: var(--bg-2);
-  border: 1px solid rgba(27,111,232,0.2);
+  border: 1px solid rgba(14,165,233,0.18);
   border-top: 2px solid var(--elec);
   width: 100%; max-width: 420px; padding: 2.25rem;
   position: relative;
   box-shadow: 0 24px 80px rgba(0,0,0,0.9), var(--glow-elec);
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  border-radius: var(--radius);
 }
-/* Coin coupé décoration */
-.auth-modal-box::before {
-  content: '';
-  position: absolute; top: 0; right: 0;
-  width: 0; height: 0; border-style: solid;
-  border-width: 16px 16px 0 0;
-  border-color: var(--bg-3) transparent transparent transparent;
-  z-index: 2;
-}
+.auth-modal-box::before { display: none; }
 .auth-modal-title {
   font-family: var(--display); font-size: 1.8rem; letter-spacing: 0.06em;
   margin-bottom: 1.5rem; color: var(--txt);
