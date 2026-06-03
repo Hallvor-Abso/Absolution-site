@@ -324,21 +324,22 @@
 }
 
 /* ══════════════════════════════
-   ACCUEIL — HERO
+   ACCUEIL — HERO V2 (éditorial, gauche)
 ══════════════════════════════ */
 .hero {
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: calc(var(--nav-h) + 1.75rem) 2rem 2.5rem;
-  position: relative; overflow: hidden; min-height: 0;
+  display: block;
+  text-align: left;
+  padding: calc(var(--nav-h) + 5rem) 2rem 5rem;
+  position: relative; overflow: hidden;
 }
-/* Halo atmosphérique centré */
+/* Halo atmosphérique — légèrement à gauche */
 .hero::before {
-  content: ''; position: absolute; top: -15%; left: 50%; transform: translateX(-50%);
-  width: 1100px; height: 720px;
-  background: radial-gradient(ellipse at 50% 28%,
-    rgba(14,165,233,0.13) 0%,
-    rgba(6,182,212,0.05) 42%,
-    transparent 70%);
+  content: ''; position: absolute; top: -10%; left: 20%; transform: none;
+  width: 900px; height: 700px;
+  background: radial-gradient(ellipse at 30% 30%,
+    rgba(14,165,233,0.11) 0%,
+    rgba(6,182,212,0.04) 45%,
+    transparent 72%);
   pointer-events: none; z-index: 0;
 }
 .hero::after { display: none; }
@@ -348,14 +349,20 @@
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   pointer-events: none; z-index: 0;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
-.hero-inner { position: relative; z-index: 1; }
+.hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+
+/* Top row : jeux + recrutement */
+.hero-top-row {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 1.5rem;
+  flex-wrap: wrap; margin-bottom: 4rem;
+}
 
 .hero-eye {
-  display: inline-flex; align-items: center; gap: 0.75rem;
-  margin-bottom: 2rem;
+  display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
 }
 .hero-eye-badge {
   background: var(--bg-2);
@@ -369,52 +376,49 @@
 .hero-eye-dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--success-light); display: inline-block; flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(61,255,178,0.7);
+  box-shadow: 0 0 8px rgba(52,211,153,0.7);
   animation: pulse-dot 2s ease-in-out infinite;
 }
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(61,255,178,0.7); }
-  50%       { opacity: 0.6; box-shadow: 0 0 3px rgba(61,255,178,0.3); }
-}
-
-/* Titre principal — style "logo cristal" */
-.hero-title {
-  font-family: var(--display);
-  font-size: clamp(4.5rem, 13vw, 9.5rem);
-  letter-spacing: 0.06em; line-height: 0.88;
-  margin-bottom: 0.4rem;
-  background: linear-gradient(160deg,
-    #FFFFFF 0%,
-    var(--elec-bright) 25%,
-    var(--elec-light) 50%,
-    var(--cyan) 80%,
-    rgba(0,200,255,0.6) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  /* Halo lumineux */
-  filter: drop-shadow(0 0 30px rgba(27,111,232,0.35)) drop-shadow(0 0 60px rgba(0,200,255,0.15));
-}
-/* Lettre A — référence directe au logo */
-.hero-title span {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(160deg, #FFFFFF 0%, var(--cyan) 60%, var(--elec) 100%);
-  -webkit-background-clip: text; background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(0,200,255,0.5));
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(52,211,153,0.7); }
+  50%       { opacity: 0.6; box-shadow: 0 0 3px rgba(52,211,153,0.3); }
 }
 
 .hero-game {
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--txt-3); margin-bottom: 2.5rem;
-  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  color: var(--txt-3); margin-bottom: 0;
+  display: flex; align-items: center; gap: 1rem;
 }
 .hero-game .g-wow { color: var(--elec-light); }
 .hero-game .g-swt { color: var(--red-light); }
 .hero-game .g-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--txt-4); display: inline-block; }
 
-.hero-desc {
-  font-family: var(--body); font-size: 1.1rem; color: var(--txt-2);
-  line-height: 1.9; max-width: 520px; margin: 0 auto 3.5rem;
+/* Manifesto typographique */
+.hero-manifesto { margin-bottom: 2.5rem; }
+.hm-line {
+  font-family: var(--display);
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  line-height: 0.88; letter-spacing: 0.01em;
+  color: var(--txt); display: block;
 }
-.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.hm-accent {
+  background: linear-gradient(135deg, var(--elec-bright) 0%, var(--elec) 55%, var(--cyan) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 32px rgba(14,165,233,0.28));
+}
+
+.hero-desc {
+  font-family: var(--body); font-size: 1rem; color: var(--txt-3);
+  line-height: 1.85; max-width: 400px; margin: 0 0 3rem 0;
+}
+.hero-btns { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; }
+
+@media (max-width: 700px) {
+  .hero { padding: calc(var(--nav-h) + 3rem) 1.5rem 3.5rem; }
+  .hm-line { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .hero-top-row { margin-bottom: 2.5rem; }
+  .hero-desc { max-width: 100%; }
+}
 
 /* ══════════════════════════════
    STATS — "TERMINAL"
