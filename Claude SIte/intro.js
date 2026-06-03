@@ -98,11 +98,11 @@
   setTimeout(function () {
     overlay.classList.add('fade-out');
     bodyStyle.textContent = 'body > *:not(#abs-intro) { opacity: 1; transition: opacity 0.6s ease; }';
-  }, 1550);
+  }, 3400);
 
   setTimeout(function () {
     overlay.remove();
     style.remove();
     bodyStyle.remove();
-  }, 2200);
+  }, 4100);
 })();
