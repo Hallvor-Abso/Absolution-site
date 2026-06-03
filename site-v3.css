@@ -266,6 +266,17 @@
 /* Séparateur vertical entre les deux panels */
 .game-card.wow { border-right: 1px solid rgba(255,255,255,0.06); }
 
+/* WoW seul (SWTOR désactivé) — centrage automatique */
+.games-grid:has(.game-card.swtor[style*="display"]) .game-card.wow {
+  align-items: center;
+  text-align: center;
+  border-right: none;
+  justify-content: center;
+}
+.games-grid:has(.game-card.swtor[style*="display"]) .game-card.wow .game-desc {
+  max-width: 560px;
+}
+
 /* Ligne électrique en haut — toujours visible */
 .game-card::after {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;

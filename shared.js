@@ -138,16 +138,16 @@
 
     function resize() {
       c.width = window.innerWidth; c.height = window.innerHeight; pts = [];
-      var n = Math.max(60, Math.min(110, Math.floor(c.width * c.height / 12000)));
+      var n = Math.max(70, Math.min(130, Math.floor(c.width * c.height / 10000)));
       for (var i = 0; i < n; i++) {
-        var bright = Math.random() < 0.09;
+        var bright = Math.random() < 0.12;
         pts.push({
           x: Math.random() * c.width,
           y: Math.random() * c.height,
-          vx: (Math.random() - .5) * (bright ? 0.05 : 0.11),
-          vy: (Math.random() - .5) * (bright ? 0.05 : 0.11),
-          r: bright ? Math.random() * 1.0 + 0.8 : Math.random() * 0.55 + 0.15,
-          baseOp: bright ? Math.random() * 0.25 + 0.45 : Math.random() * 0.18 + 0.05,
+          vx: (Math.random() - .5) * (bright ? 0.04 : 0.10),
+          vy: (Math.random() - .5) * (bright ? 0.04 : 0.10),
+          r: bright ? Math.random() * 1.2 + 1.0 : Math.random() * 0.8 + 0.5,
+          baseOp: bright ? Math.random() * 0.20 + 0.60 : Math.random() * 0.25 + 0.20,
           phase: Math.random() * Math.PI * 2,
           spd: Math.random() * 0.4 + 0.25,
           bright: bright
