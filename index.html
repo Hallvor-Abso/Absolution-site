@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absolution &mdash; Guilde WoW Mythic &amp; SWTOR</title>
+  <meta name="description" content="Guilde française semi-hardcore. WoW Mythic · SWTOR progression.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Absolution — Guilde WoW Mythic &amp; SWTOR">
+  <meta property="og:description" content="Guilde française semi-hardcore. WoW Mythic · SWTOR progression.">
+  <meta property="og:image" content="https://absolution-guild.pages.dev/og-banner.jpg">
+  <meta property="og:url" content="https://absolution-guild.pages.dev/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-v3.css">
+  <link rel="stylesheet" href="nav-v3.css">
+  <link rel="stylesheet" href="site-v3.css">
+<style>
+.fi{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+.fi.on{opacity:1;transform:none;}
+.fi.d1{transition-delay:.08s;}.fi.d2{transition-delay:.16s;}
+.fi.d3{transition-delay:.24s;}.fi.d4{transition-delay:.32s;}
+</style>
+</head>
+<body class="page-body">
+<canvas id="bg-canvas"></canvas>
+<script src="intro.js"></script>
+<div id="nav-root"></div>
+<div id="mobile-overlay-root"></div>
+<div id="auth-modal-root"></div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="hero-eye fi" id="recruit-status">
+      <span class="hero-eye-badge" id="recruit-wow" data-game="wow" style="display:none;">
+        <span class="hero-eye-dot" id="dot-wow"></span>
+        <span id="label-wow">WoW &mdash; Recrutement ouvert</span>
+      </span>
+      <span class="hero-eye-badge" id="recruit-swtor" data-game="swtor" style="display:none;">
+        <span class="hero-eye-dot" id="dot-swtor"></span>
+        <span id="label-swtor">SWTOR &mdash; Recrutement ouvert</span>
+      </span>
+    </div>
+    <div class="hero-game fi d1">
+      <span class="g-wow" data-game="wow">&#9876;&#65039; World of Warcraft</span>
+      <span class="g-dot" id="hero-dot-sep"></span>
+      <span class="g-swt" data-game="swtor">&#128640; SWTOR</span>
+    </div>
+    <p class="hero-desc fi d2" data-eid="hero-desc">
+      Guilde semi-hardcore francophone. On progresse ensemble,<br>
+      on s&apos;am&eacute;liore ensemble. Z&eacute;ro toxicit&eacute;, cent pour cent investissement.
+    </p>
+    <div class="hero-btns fi d3">
+      <button class="btn btn-primary" onclick="document.getElementById('modal-postuler').style.display='flex'">Postuler &rarr;</button>
+      <a href="roster.html" class="btn btn-secondary">Voir le roster</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="s-stats">
+  <div class="stats">
+    <div class="stat fi">
+      <div class="sv p" data-counter="60" data-suffix="+" data-eid="stat-val-1">60+</div>
+      <div class="sl" data-eid="stat-lbl-1">Membres actifs</div>
+    </div>
+    <div class="stat fi d1">
+      <div class="sv" data-eid="stat-val-2">FR</div>
+      <div class="sl" data-eid="stat-lbl-2">Communaut&eacute;</div>
+    </div>
+    <div class="stat fi d2">
+      <div class="sv r" data-eid="stat-val-3">Semi&#8209;HC</div>
+      <div class="sl" data-eid="stat-lbl-3">Niveau de jeu</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESSION -->
+<section id="s-progression" style="display:none;">
+  <div style="max-width:1200px;margin:0 auto;padding:3.5rem 2rem 0;">
+    <div id="idx-progression"></div>
+  </div>
+</section>
+
+<!-- NOS JEUX -->
+<section id="s-games">
+  <div class="wrap">
+    <div class="sec-header fi">
+      <div class="sec-eyebrow" data-eid="games-eyebrow">Nos univers</div>
+      <h2 class="sec-title" data-eid="games-title">Deux jeux, une philosophie</h2>
+    </div>
+  </div>
+  <div class="games-grid">
+    <a href="jeux.html#wow" class="game-card wow" data-game="wow">
+      <span class="game-icon">&#9876;&#65039;</span>
+      <div class="game-name" data-eid="game-wow-name">World of Warcraft</div>
+      <p class="game-desc" data-eid="game-wow-desc">Raids Mythic et Mythic+. On analyse les logs, on optimise les compos, on progresse soir&eacute;e apr&egrave;s soir&eacute;e. Chaque boss down est m&eacute;rit&eacute;.</p>
+      <div class="game-factions">
+        <span class="faction blue">Alliance</span>
+        <span class="faction blue">Horde</span>
+      </div>
+      <span class="game-link">Voir la section WoW &rarr;</span>
+    </a>
+    <a href="jeux.html#swtor" class="game-card swtor" data-game="swtor">
+      <span class="game-icon">&#128640;</span>
+      <div class="game-name" data-eid="game-swtor-name">Star Wars : TOR</div>
+      <p class="game-desc" data-eid="game-swtor-desc">Op&eacute;rations PvE dans une galaxie lointaine, tr&egrave;s lointaine. R&eacute;publique ou Empire &mdash; la philosophie reste la m&ecirc;me : excellence.</p>
+      <div class="game-factions">
+        <span class="faction red">R&eacute;publique</span>
+        <span class="faction red">Empire Sith</span>
+      </div>
+      <span class="game-link">Voir la section SWTOR &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ACTUALITES -->
+<section id="s-news">
+  <div class="wrap">
+    <div class="sec-header fi">
+      <div class="sec-eyebrow" data-eid="news-eyebrow">Chroniques de la guilde</div>
+      <h2 class="sec-title" data-eid="news-title">Derni&egrave;res actualit&eacute;s</h2>
+    </div>
+  </div>
+  <div class="nl fi d1">
+    <div id="idx-featured"></div>
+    <div class="ns" id="idx-sidebar"></div>
+  </div>
+  <div style="text-align:center;padding:2.5rem 0 0;">
+    <a href="news.html" class="btn btn-ghost">Toutes les actualit&eacute;s &rarr;</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="s-cta">
+  <div class="ct fi">
+    <h2 data-eid="cta-title">Pr&ecirc;t &agrave; tryhard&nbsp;?</h2>
+    <p data-eid="cta-desc">Tu cherches une guilde s&eacute;rieuse, sans prise de t&ecirc;te ? Des gens investis qui progressent ensemble et se respectent ? C&apos;est exactement ce qu&apos;on est.</p>
+    <div class="ct-btns">
+      <a href="recrutement.html?game=wow" class="btn btn-primary" data-game="wow">Postuler WoW</a>
+      <a href="recrutement.html?game=swtor" class="btn btn-secondary" data-game="swtor">Postuler SWTOR</a>
+      <a href="https://discord.gg/ANEeFgfP8x" target="_blank" rel="noopener" class="btn btn-ghost">Discord</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="footer-root"></div>
+
+<!-- MODAL -->
+<div id="modal-postuler"
+  style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(14px);z-index:3000;align-items:center;justify-content:center;padding:2rem;"
+  onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:var(--bg-2);border:1px solid var(--bdr);border-top:2px solid var(--elec);max-width:480px;width:100%;position:relative;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);">
+    <div style="padding:2.25rem 2.5rem 2.5rem;">
+      <button onclick="document.getElementById('modal-postuler').style.display='none'"
+        style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:1px solid var(--bdr);color:var(--txt-3);cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;">&#x2715;</button>
+      <p style="font-family:var(--font);font-size:.56rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--elec-light);margin-bottom:.6rem;">Recrutement</p>
+      <h3 style="font-family:var(--font);font-size:1.5rem;font-weight:900;text-transform:uppercase;color:var(--txt);margin-bottom:.5rem;">Pour quel jeu ?</h3>
+      <p style="font-size:.85rem;color:var(--txt-3);margin-bottom:2rem;line-height:1.65;">S&eacute;lectionne l&apos;univers pour lequel tu souhaites postuler.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <a href="recrutement.html?game=wow" class="modal-choice wow-choice">
+          <div style="font-size:2.5rem;margin-bottom:.9rem;">&#9876;&#65039;</div>
+          <div style="font-family:var(--font);font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--elec-light);margin-bottom:.3rem;">World of<br>Warcraft</div>
+          <div style="font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--txt-4);">Postuler &rarr;</div>
+        </a>
+        <a href="recrutement.html?game=swtor" class="modal-choice swtor-choice">
+          <div style="font-size:2.5rem;margin-bottom:.9rem;">&#128640;</div>
+          <div style="font-family:var(--font);font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--red-light);margin-bottom:.3rem;">SWTOR</div>
+          <div style="font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--txt-4);">Postuler &rarr;</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+/* ── Particules hero ── */
+(function(){
+  var cv = document.getElementById('hero-canvas');
+  if (!cv) return;
+  var ctx = cv.getContext('2d');
+  var pts = [];
+  var N = 55;
+
+  function resize(){
+    cv.width  = cv.offsetWidth;
+    cv.height = cv.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* Initialise les particules */
+  for (var i = 0; i < N; i++) pts.push({
+    x:  Math.random() * cv.width,
+    y:  Math.random() * cv.height,
+    r:  Math.random() * 1.4 + 0.4,
+    vx: (Math.random() - 0.5) * 0.22,
+    vy: (Math.random() - 0.5) * 0.22,
+    op: Math.random() * 0.5 + 0.15,
+    phase: Math.random() * Math.PI * 2
+  });
+
+  var t = 0;
+  function draw(){
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    t += 0.008;
+
+    /* Connexions entre particules proches */
+    for (var i = 0; i < pts.length; i++){
+      for (var j = i + 1; j < pts.length; j++){
+        var dx = pts[i].x - pts[j].x;
+        var dy = pts[i].y - pts[j].y;
+        var d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 110){
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(27,111,232,' + (0.07 * (1 - d/110)).toFixed(3) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    /* Points */
+    for (var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      /* Dérive organique avec sinus */
+      p.x += p.vx + Math.sin(t + p.phase) * 0.12;
+      p.y += p.vy + Math.cos(t + p.phase * 0.7) * 0.10;
+      /* Rebond doux */
+      if (p.x < 0) p.x = cv.width;
+      if (p.x > cv.width) p.x = 0;
+      if (p.y < 0) p.y = cv.height;
+      if (p.y > cv.height) p.y = 0;
+
+      var pulse = p.op * (0.7 + 0.3 * Math.sin(t * 1.2 + p.phase));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(74,159,255,' + pulse.toFixed(3) + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+<script src="config.js"></script>
+<script src="settings.js"></script>
+<script src="shared.js"></script>
+<script src="blocks.js"></script>
+<script src="auth.js"></script>
+<script src="news-cards.js"></script>
+<script>
+NC.get('/rest/v1/news?select=*&order=published_at.desc&limit=10').then(function(news){
+  if(!news||!news.length)return;
+  var f=document.getElementById('idx-featured'),s=document.getElementById('idx-sidebar');
+  var featured=news.find(function(a){return a.featured;})||news[0];
+  var rest=news.filter(function(a){return a.id!==featured.id;}).slice(0,3);
+  if(f)f.innerHTML=NC.card(featured,true);
+  if(s)s.innerHTML=rest.map(function(a){return NC.card(a,false);}).join('');
+});
+
+window.SETTINGS_P.then(function(cfg){
+  var wowOn=cfg['wow_enabled']!=='false',swtorOn=cfg['swtor_enabled']==='true';
+  var sep=document.getElementById('hero-dot-sep');
+  if(sep)sep.style.display=(wowOn&&swtorOn)?'':'none';
+  /* Un seul jeu actif → card centrée */
+  if(wowOn !== swtorOn){
+    var grid=document.querySelector('.games-grid');
+    if(grid){
+      grid.style.gridTemplateColumns='1fr';
+      grid.style.maxWidth='600px';
+    }
+    /* Masquer la card inactive */
+    var hide=document.querySelector('.game-card.'+(wowOn?'swtor':'wow'));
+    if(hide)hide.style.display='none';
+  }
+});
+
+(function(){
+  var SB  = window.SB_URL;
+  var KEY = window.SB_KEY;
+  var H   = window.SB_H;
+  Promise.all([window.SETTINGS_P,fetch(SB+'/rest/v1/recruitment?select=game,status',{headers:H}).then(function(r){return r.json();})]).then(function(res){
+    var cfg=res[0]||{},data=Array.isArray(res[1])?res[1]:[];
+    var wowOn=cfg['wow_enabled']!=='false',swtorOn=cfg['swtor_enabled']==='true';
+    ['wow','swtor'].forEach(function(game){
+      var badge=document.getElementById('recruit-'+game);
+      var dot=document.getElementById('dot-'+game);
+      var label=document.getElementById('label-'+game);
+      if(!badge||!dot||!label)return;
+      if(!(game==='wow'?wowOn:swtorOn)){badge.style.display='none';return;}
+      var roles=data.filter(function(r){return r.game===game;});
+      if(!roles.length){badge.style.display='none';return;}
+      var hasOpen=roles.some(function(r){return r.status==='open';});
+      var nm=game==='wow'?'WoW':'SWTOR';
+      badge.style.display='inline-flex';
+      if(hasOpen){
+        dot.style.background='var(--success-light)';
+        label.textContent=nm+' — Recrutement ouvert';
+      } else {
+        dot.style.background='var(--txt-3)';
+        dot.style.boxShadow='none';
+        badge.style.borderColor='var(--bdr)';
+        badge.style.color='var(--txt-3)';
+        label.textContent=nm+' — Recrutement fermé';
+      }
+    });
+  }).catch(function(){});
+
+  Promise.all([window.SETTINGS_P,fetch(SB+'/rest/v1/progression?is_current=eq.true&order=game.asc',{headers:H}).then(function(r){return r.json();})]).then(function(res){
+    var cfg=res[0]||{},data=Array.isArray(res[1])?res[1]:[];
+    if(!data.length)return;
+    var section=document.getElementById('s-progression'),el=document.getElementById('idx-progression');
+    if(!section||!el)return;
+    var rioReg=cfg['raiderio_region']||'eu';
+    var rioRlm=(cfg['raiderio_realm']||'').toLowerCase().replace(/\s+/g,'-');
+    var rioGld=(cfg['raiderio_guild']||'').toLowerCase().replace(/\s+/g,'-');
+    var rioUrl=(rioRlm&&rioGld)?'https://raider.io/guilds/'+rioReg+'/'+rioRlm+'/'+rioGld:'';
+    section.style.display='block';
+    var DIFF={mythic:'Mythic',heroic:'Héroïque',normal:'Normal',master:'Maître',veteran:'Vétéran'};
+    var COLORS={wow:'#1B6FE8',swtor:'#E8281B'};
+    var DIFF_C={mythic:'#F87171',heroic:'#FCD34D',normal:'#34D399',master:'#F87171',veteran:'#FCD34D'};
+    var GAME_LBL={wow:'World of Warcraft',swtor:'SWTOR'};
+    var GAME_LNK={wow:'jeux.html',swtor:'jeux.html#swtor'};
+    var html=data.map(function(p){
+      var bosses=[];
+      try{bosses=typeof p.bosses_data==='string'?JSON.parse(p.bosses_data):(p.bosses_data||[]);}catch(e){}
+      var total=bosses.length||p.bosses_total||0;
+      var killed=bosses.length?bosses.filter(function(b){return b.killed;}).length:(p.bosses_killed||0);
+      var pct=total?Math.round((killed/total)*100):0;
+      var color=COLORS[p.game]||'#1B6FE8';
+      var dc=DIFF_C[p.difficulty]||'#475569';
+      var barC=pct===100?'var(--success-light)':color;
+      var isClr=pct===100;
+
+      var bossGrid='';
+      if(bosses.length){
+        bossGrid='<div class="boss-grid">'+
+          bosses.map(function(b,i){
+            var dead=!!b.killed;
+            var imgStyle=b.image?'style="background-image:url('+b.image+');background-size:cover;background-position:center;"':'';
+            return '<div class="boss-item '+(dead?'dead':'alive')+'">'+
+              '<div class="boss-img-wrap'+(b.image?' has-img':'')+'" '+imgStyle+'>'+
+                (!b.image?'<div class="boss-num">'+(i+1)+'</div>':'')+
+                '<div class="boss-badge '+(dead?'dead':'alive')+'">'+(dead?'✓':'☠')+'</div>'+
+              '</div>'+
+              '<div class="boss-name">'+(b.name||'Boss '+(i+1))+'</div>'+
+            '</div>';
+          }).join('')+
+        '</div>';
+      }
+
+      return '<div class="prog-card'+(isClr?' cleared':'')+'" style="border-top-color:'+color+';">'+
+        '<div class="prog-card-header">'+
+          '<div class="prog-card-info">'+
+            '<div class="prog-card-eyebrow">'+
+              '<span style="color:'+color+';">⚡ Progression en cours</span>'+
+              '<span class="prog-card-eyebrow-sep"></span>'+
+              '<span style="color:var(--txt-3);">'+(GAME_LBL[p.game]||p.game)+'</span>'+
+            '</div>'+
+            '<div class="prog-card-name">'+p.tier_name+'</div>'+
+          '</div>'+
+          '<div class="prog-card-score">'+
+            '<div class="prog-card-score-val'+(isClr?' cleared':'')+'">'+killed+'<span>/'+total+'</span></div>'+
+            '<div class="prog-card-diff" style="color:'+dc+';">'+(DIFF[p.difficulty]||p.difficulty)+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="prog-bar"><div class="prog-bar-fill" style="width:'+pct+'%;background:'+barC+';"></div></div>'+
+        bossGrid+
+        '<div class="prog-card-footer">'+
+          '<span>'+(isClr?'🏆 Raid terminé':killed+'/'+total+' boss — '+pct+'% de progression')+'</span>'+
+          '<div class="prog-footer-links">'+
+            (p.game==='wow'&&rioUrl?'<a href="'+rioUrl+'" target="_blank" rel="noopener" class="prog-rio-link">Raider.io ↗</a>':'')+
+            '<a href="'+(GAME_LNK[p.game]||'jeux.html')+'" class="prog-detail-link" style="color:'+color+';">Détails →</a>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+    el.innerHTML=data.length>1?'<div class="prog-multi">'+html+'</div>':html;
+  }).catch(function(){});
+})();
+
+(function(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+  },{threshold:.1});
+  document.querySelectorAll('.fi').forEach(function(el){io.observe(el);});
+
+  function ease(t){return 1-Math.pow(1-t,3);}
+  function counter(el,target,suffix,dur){
+    var st=null;
+    (function step(ts){
+      /* Si blocks.js a supprimé data-counter → arrêter l'animation */
+      if(!el.hasAttribute('data-counter'))return;
+      if(!st)st=ts;
+      var p=Math.min((ts-st)/dur,1);
+      el.textContent=Math.floor(ease(p)*target)+(suffix||'');
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=target+(suffix||'');
+    })(performance.now());
+  }
+
+  var cio=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target;
+      var t=parseInt(el.getAttribute('data-counter'),10);
+      var s=el.getAttribute('data-suffix')||'';
+      if(!isNaN(t))counter(el,t,s,1400);
+      cio.unobserve(el);
+    });
+  },{threshold:.5});
+  document.querySelectorAll('[data-counter]').forEach(function(el){cio.observe(el);});
+})();
+</script>
+</body>
+</html>

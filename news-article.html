@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="cosmic">
+<head>
+  <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article — Absolution</title>
+  <meta name="description"        content="Actualité de la guilde Absolution.">
+  <meta property="og:type"        content="article">
+  <meta property="og:title"       content="Article — Absolution">
+  <meta property="og:description" content="Actualité de la guilde Absolution.">
+  <meta property="og:image"       content="https://absolution-guild.pages.dev/og-banner.jpg">
+  <meta property="og:url"         content="https://absolution-guild.pages.dev/news-article.html">
+  <meta name="twitter:card"       content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-v3.css">
+  <link rel="stylesheet" href="nav-v3.css">
+  <link rel="stylesheet" href="site-v3.css">
+</head>
+<body class="page-body">
+<!-- Ce bloc est identique dans toutes les pages -->
+<canvas id="bg-canvas"></canvas>
+<div id="nav-root"></div>
+<div id="mobile-overlay-root"></div>
+<div id="auth-modal-root"></div>
+
+<main>
+
+
+<div class="article-hero">
+  <div class="article-meta" id="art-meta"></div>
+  <h1 class="article-title" id="art-title"></h1>
+  <p class="article-intro" id="art-intro"></p>
+</div>
+
+<div class="article-body" id="art-body">
+  <div class="article-footer">
+    <a href="news.html" class="btn btn-ghost" style="font-size:0.6rem;letter-spacing:0.2em;">← Retour aux actualités</a>
+  </div>
+</div>
+
+<div id="related-wrap" style="display:none;">
+  <div class="related-section">
+    <span class="related-label">Articles similaires</span>
+    <div class="related-grid" id="related-grid"></div>
+  </div>
+</div>
+
+</main>
+
+<div id="footer-root"></div>
+<script src="config.js"></script>
+<script src="settings.js"></script>
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+<script src="news-cards.js"></script>
+<script>
+var id = new URLSearchParams(window.location.search).get('id');
+if (id) {
+  NC.get('/rest/v1/news?select=*&id=eq.' + id).then(function(data) {
+    var a = Array.isArray(data) && data.length ? data[0] : null;
+    var titleEl = document.getElementById('art-title');
+    if (!a) { if (titleEl) titleEl.textContent = 'Article introuvable'; return; }
+    if (a.published === false || (a.publish_at && new Date(a.publish_at) > new Date())) {
+      if (titleEl) titleEl.textContent = 'Article introuvable'; return;
+    }
+
+    /* Titre + OG dynamiques */
+    var pageTitle = a.title + ' — Absolution';
+    var pageDesc  = a.excerpt || 'Actualité de la guilde Absolution.';
+    var pageUrl   = 'https://absolution-guild.pages.dev/news-article.html?id=' + a.id;
+    document.title = pageTitle;
+    var setMeta = function(sel, val) { var el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+    setMeta('meta[name="description"]',          pageDesc);
+    setMeta('meta[property="og:title"]',         pageTitle);
+    setMeta('meta[property="og:description"]',   pageDesc);
+    setMeta('meta[property="og:url"]',           pageUrl);
+    var c = NC.COLORS[a.game] || '#6A82A0';
+    var l = NC.LABELS[a.game] || a.game;
+    var meta = document.getElementById('art-meta');
+    if (meta) {
+      meta.innerHTML =
+        '<span class="card-tag ' + a.game + '">' + l + '</span>' +
+        '<span class="card-date" style="margin-bottom:0;">' + NC.fmt(a.published_at) + '</span>' +
+        (a.author ? '<span style="font-size:0.72rem;color:var(--text-muted);">Par ' + a.author + '</span>' : '');
+    }
+    if (titleEl) titleEl.textContent = a.title;
+    var intro = document.getElementById('art-intro');
+    if (intro) intro.textContent = a.excerpt || '';
+
+    var body = document.getElementById('art-body');
+    if (body && a.content) {
+      var footer = body.querySelector('.article-footer');
+      // Si le contenu contient déjà du HTML (éditeur riche), on l'insère directement
+      // Sinon on convertit les doubles sauts de ligne en paragraphes
+      var isHtml = /<[a-z][\s\S]*>/i.test(a.content);
+      var html = isHtml ? a.content : a.content.split('\n\n').filter(function(p) { return p.trim(); })
+        .map(function(p) { return '<p>' + p.trim().replace(/\n/g, '<br>') + '</p>'; }).join('');
+      if (footer) footer.insertAdjacentHTML('beforebegin', html);
+    }
+
+    if (a.game) {
+      NC.get('/rest/v1/news?select=id,title,game,excerpt&order=published_at.desc&limit=10&game=eq.' + a.game)
+        .then(function(related) {
+          var filtered = (Array.isArray(related) ? related : []).filter(function(r) { return String(r.id) !== String(id); }).slice(0, 2);
+          var wrap = document.getElementById('related-wrap');
+          var grid = document.getElementById('related-grid');
+          if (wrap && grid && filtered.length) {
+            grid.innerHTML = filtered.map(function(r) { return NC.card(r, false); }).join('');
+            wrap.style.display = 'block';
+          }
+        });
+    }
+  });
+}
+</script>
+</body></html>

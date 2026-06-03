@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="cosmic">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendrier — Absolution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme-v3.css">
+  <link rel="stylesheet" href="nav-v3.css">
+  <link rel="stylesheet" href="site-v3.css">
+  
+</head>
+<body class="page-body">
+<!-- Ce bloc est identique dans toutes les pages -->
+<canvas id="bg-canvas"></canvas>
+<div id="nav-root"></div>
+<div id="mobile-overlay-root"></div>
+<div id="auth-modal-root"></div>
+
+<main>
+
+
+<div class="hero-page">
+  <span class="eyebrow">La guilde</span>
+  <h1 class="hero-h1">Calendrier</h1>
+</div>
+
+<div class="cal-wrap">
+  <div id="cal-nologin" style="display:none;">
+    <h2>Acces reserve</h2>
+    <p>Tu dois etre un membre connecte pour voir le calendrier.</p>
+    <button class="btn btn-primary" onclick="openAuth('login')">Se connecter</button>
+  </div>
+
+  <div id="cal-content" class="game-wow" style="display:none;">
+
+    <!-- Onglets jeux -->
+    <div class="game-tabs">
+      <button class="game-tab wow active" data-game="wow" onclick="switchGame('wow',this)">WoW</button>
+      <button class="game-tab swtor" data-game="swtor" onclick="switchGame('swtor',this)">SWTOR</button>
+    </div>
+
+    <!-- Barre vues + nav mois -->
+    <div class="view-tabs">
+      <button class="view-tab active" id="vt-month" onclick="switchView('month')">Mois</button>
+      <button class="view-tab"        id="vt-list"  onclick="switchView('list')">Liste</button>
+      <div class="month-nav">
+        <button onclick="changeMonth(-1)">&#8592;</button>
+        <span class="month-label" id="month-label"></span>
+        <button onclick="changeMonth(1)">&#8594;</button>
+        <button onclick="goToday()" style="font-size:0.58rem;">Aujourd'hui</button>
+      </div>
+    </div>
+
+    <!-- Vue mensuelle -->
+    <div id="view-month">
+      <div class="month-grid" id="month-grid"></div>
+    </div>
+
+    <!-- Vue liste -->
+    <div id="view-list" style="display:none;">
+      <div id="list-content"></div>
+    </div>
+  </div>
+
+
+<!-- Popup detail depuis vue semaine -->
+<div class="ev-popup" id="ev-popup">
+  <div class="ev-popup-box">
+    <button class="ev-popup-close" onclick="document.getElementById('ev-popup').classList.remove('open')">&#10005;</button>
+    <div id="ev-popup-content"></div>
+  </div>
+</div>
+
+</main>
+
+<div id="footer-root"></div>
+<script src="config.js"></script>
+<script src="settings.js"></script>
+<script src="shared.js"></script>
+<script src="blocks.js"></script>
+<script src="auth.js"></script>
+<script src="calendrier.js"></script>
+<script>
+function onAuthReady(user, profile) {
+  var nologin = document.getElementById('cal-nologin');
+  var content = document.getElementById('cal-content');
+
+  /* Non connecté */
+  if (!user || !profile) {
+    nologin.style.display = 'block';
+    content.style.display = 'none';
+    return;
+  }
+
+  /* Connecté mais aucun jeu accessible (visiteur partout) */
+  if (!hasWowAccess() && !hasSwtorAccess()) {
+    nologin.style.display = 'block';
+    nologin.querySelector('p').textContent = 'Le calendrier est réservé aux membres à partir du grade Recrue.';
+    content.style.display = 'none';
+    return;
+  }
+
+  /* Masquer l'onglet du jeu non accessible */
+  var wowTab   = document.querySelector('.game-tab.wow');
+  var swtorTab = document.querySelector('.game-tab.swtor');
+  if (!hasWowAccess()   && wowTab)   wowTab.style.display   = 'none';
+  if (!hasSwtorAccess() && swtorTab) swtorTab.style.display = 'none';
+
+  /* Masquer le lien calendrier mobile si non autorisé (déjà géré par auth.js mais sécurité supplémentaire) */
+  var mobileLink = document.getElementById('mobile-cal-link');
+  if (mobileLink && !hasAnyGameAccess()) mobileLink.style.display = 'none';
+
+  /* Démarrer sur le premier jeu accessible */
+  var defaultGame = hasWowAccess() ? 'wow' : 'swtor';
+  content.style.display = 'block';
+  calInit(user.id, defaultGame);
+}
+</script>
+
+<script>
+/* Basculer sur l'onglet visible dès que SETTINGS_P résout */
+window.SETTINGS_P.then(function() {
+  var tabs = document.querySelectorAll('.game-tab');
+  var activeTab = null;
+  tabs.forEach(function(t) { if (t.classList.contains('active')) activeTab = t; });
+  if (activeTab && activeTab.style.display === 'none') {
+    tabs.forEach(function(t) {
+      if (t.style.display !== 'none') {
+        var game = t.getAttribute('data-game');
+        if (game && typeof switchGame === 'function') switchGame(game, t);
+      }
+    });
+  }
+});
+</script>
+</body></html>

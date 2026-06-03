@@ -1,0 +1,255 @@
+﻿/* ═══════════════════════════════════════════════════
+   ABSOLUTION — Theme V3 "FRACTURE"
+   Électrique · Cristallin · Acier · Tranchant
+   Inspiré du logo : noir absolu / bleu foudre / argent
+═══════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap');
+
+:root {
+  /* ── Primaire — Sky Blue (distinctif, raffiné) ── */
+  --elec:             #0EA5E9;
+  --elec-light:       #38BDF8;
+  --elec-bright:      #7DD3FC;
+  --elec-dim:         #0369A1;
+  --cyan:             #06B6D4;
+  --cyan-dim:         #155E75;
+
+  /* ── Prestige — Ambre / Or ── */
+  --gold:             #92400E;
+  --gold-light:       #D97706;
+  --gold-bright:      #F59E0B;
+  --gold-dim:         #451A03;
+
+  /* ── Danger / SWTOR ── */
+  --red:              #DC2626;
+  --red-light:        #F87171;
+  --red-dim:          #7F1D1D;
+
+  /* ── Acier ── */
+  --silver:           #CBD5E1;
+  --silver-dim:       #64748B;
+  --steel:            #1E3A5F;
+
+  /* ── Success ── */
+  --success:          #059669;
+  --success-light:    #34D399;
+
+  /* ── Fonds — profonds ── */
+  --bg:               #06080F;
+  --bg-2:             #0B0F1C;
+  --bg-3:             #101828;
+  --bg-4:             #162035;
+
+  /* ── Textes ── */
+  --txt:              #F0F9FF;
+  --txt-2:            #7DD3FC;
+  --txt-3:            #475569;
+  --txt-4:            #1E2D3D;
+
+  /* ── Bordures ── */
+  --bdr:              rgba(14,165,233,0.10);
+  --bdr-elec:         rgba(14,165,233,0.40);
+  --bdr-strong:       rgba(56,189,248,0.50);
+  --bdr-cyan:         rgba(6,182,212,0.28);
+
+  /* ── Typographie ── */
+  --display:          'Bebas Neue', sans-serif;
+  --body:             'Outfit', sans-serif;
+  --font:             'Outfit', sans-serif;
+
+  /* ── Misc ── */
+  --radius:           2px;
+  --nav-h:            60px;
+  --transition:       0.16s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Shadows & Glows ── */
+  --shadow:           0 8px 40px rgba(0,0,0,0.85);
+  --glow-elec:        0 0 28px rgba(14,165,233,0.35);
+  --glow-cyan:        0 0 24px rgba(6,182,212,0.28);
+  --glow-red:         0 0 24px rgba(220,38,38,0.28);
+  --glow-sm:          0 0 12px rgba(14,165,233,0.18);
+  --glow-gold:        0 0 24px rgba(217,119,6,0.30);
+
+  /* ── Aliases compatibilité ── */
+  --blue:             #0EA5E9;
+  --blue-light:       #38BDF8;
+  --blue-dark:        #0369A1;
+  --violet:           #0EA5E9;
+  --color-primary:    #0EA5E9;
+  --color-secondary:  #DC2626;
+  --color-accent:     #06B6D4;
+  --color-tertiary:   #7DD3FC;
+  --color-success:    #34D399;
+  --bg-base:          #06080F;
+  --bg-surface:       #0B0F1C;
+  --bg-card:          #0B0F1C;
+  --bg-card-hover:    #101828;
+  --text-primary:     #F0F9FF;
+  --text-secondary:   #7DD3FC;
+  --text-muted:       #475569;
+  --text-dim:         #0C1828;
+  --border:           rgba(14,165,233,0.10);
+  --border-strong:    rgba(14,165,233,0.40);
+  --shadow-blue:      0 0 28px rgba(14,165,233,0.35);
+  --shadow-red:       0 0 24px rgba(220,38,38,0.28);
+  --shadow-gold:      0 0 28px rgba(217,119,6,0.30);
+  --shadow-crimson:   0 0 24px rgba(220,38,38,0.28);
+  --crimson:          #DC2626;
+  --crimson-light:    #F87171;
+  --crimson-bright:   #FCA5A5;
+  --cream:            #E0F2FE;
+  --glass-bg:         #06080F;
+  --glass-border:     rgba(14,165,233,0.10);
+  --glass-inset:      inset 0 1px 0 rgba(56,189,248,0.05);
+  --glass-blur:       blur(0px);
+  --ease:             0.16s cubic-bezier(0.4,0,0.2,1);
+  --bdr-gold:         rgba(217,119,6,0.40);
+  --success-light:    #34D399;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  background-image: radial-gradient(circle, rgba(14,165,233,0.032) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Pas de grain / scanlines en V3 ── */
+
+/* ── Glow électrique centré haut ── */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 75vw;
+  height: 50vh;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(14,165,233,0.07) 0%,
+    rgba(6,182,212,0.025) 45%,
+    transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#bg-canvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; opacity: 0.35;
+  filter: hue-rotate(210deg) saturate(1.4) brightness(0.7);
+}
+
+nav, header, main, section, footer, div, article {
+  position: relative; z-index: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.0;
+  color: var(--txt);
+}
+
+a { text-decoration: none; color: inherit; }
+
+p {
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--txt-3);
+  line-height: 1.75;
+}
+
+input, textarea, select {
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--txt);
+  background: var(--bg-3);
+  border: 1px solid var(--bdr);
+  border-radius: 0;
+  padding: 0.65rem 1rem;
+  width: 100%; outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--elec);
+  box-shadow: 0 0 0 2px rgba(27,111,232,0.15), var(--glow-sm);
+}
+::placeholder { color: var(--txt-4); }
+select option { background: var(--bg-3); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(27,111,232,0.4); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--elec); }
+
+/* ── Boutons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--body); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  border: none; cursor: pointer;
+  transition: all var(--transition); white-space: nowrap;
+  position: relative; overflow: hidden;
+}
+/* Ligne électrique en bas */
+.btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: rgba(255,255,255,0.15); transition: background var(--transition);
+}
+.btn:hover::after { background: rgba(255,255,255,0.3); }
+
+.btn-primary {
+  background: var(--elec);
+  color: #E0F2FE;
+  box-shadow: 0 2px 16px rgba(14,165,233,0.30);
+}
+.btn-primary:hover {
+  background: var(--elec-light);
+  box-shadow: var(--glow-elec);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--red-light);
+  border: 1px solid rgba(220,38,38,0.40);
+}
+.btn-secondary:hover {
+  background: rgba(220,38,38,0.08);
+  border-color: var(--red-light);
+  box-shadow: var(--glow-red);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--txt-2);
+  border: 1px solid var(--bdr);
+}
+.btn-ghost:hover {
+  border-color: var(--bdr-elec);
+  color: var(--txt);
+  background: rgba(27,111,232,0.06);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--elec-light);
+  border: 1px solid var(--bdr-elec);
+}
+.btn-outline:hover {
+  background: rgba(27,111,232,0.1);
+  border-color: var(--elec-light);
+  box-shadow: var(--glow-sm);
+}
+
+
