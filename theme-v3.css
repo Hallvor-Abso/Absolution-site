@@ -1,19 +1,19 @@
 ﻿/* ═══════════════════════════════════════════════════
-   ABSOLUTION — Theme V3 "FRACTURE"
-   Électrique · Cristallin · Acier · Tranchant
-   Inspiré du logo : noir absolu / bleu foudre / argent
+   ABSOLUTION — Theme V3 "ARC ÉLECTRIQUE"
+   Espace · Foudre · Bleu électrique · Profondeur
+   Inspiré du logo : bleu arc / profondeur stellaire
 ═══════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap');
 
 :root {
-  /* ── Primaire — Sky Blue (distinctif, raffiné) ── */
-  --elec:             #0EA5E9;
-  --elec-light:       #38BDF8;
-  --elec-bright:      #7DD3FC;
-  --elec-dim:         #0369A1;
-  --cyan:             #06B6D4;
-  --cyan-dim:         #155E75;
+  /* ── Primaire — Bleu arc électrique ── */
+  --elec:             #1B9FE8;   /* bleu électrique vif — arc principal */
+  --elec-light:       #42BDFF;   /* halo lumineux */
+  --elec-bright:      #90D9FF;   /* éclat blanc-bleu */
+  --elec-dim:         #0B5A8C;
+  --cyan:             #00D4F5;   /* cyan arc — flash secondaire */
+  --cyan-dim:         #0D4E6A;
 
   /* ── Prestige — Ambre / Or ── */
   --gold:             #92400E;
@@ -35,23 +35,23 @@
   --success:          #059669;
   --success-light:    #34D399;
 
-  /* ── Fonds — profonds ── */
-  --bg:               #06080F;
-  --bg-2:             #0B0F1C;
-  --bg-3:             #101828;
-  --bg-4:             #162035;
+  /* ── Fonds — espace profond ── */
+  --bg:               #080D1A;   /* espace — moins noir, plus bleu stellaire */
+  --bg-2:             #0C1325;
+  --bg-3:             #12203A;
+  --bg-4:             #182C4A;
 
   /* ── Textes ── */
-  --txt:              #F0F9FF;
-  --txt-2:            #7DD3FC;
-  --txt-3:            #475569;
-  --txt-4:            #1E2D3D;
+  --txt:              #EEF7FF;
+  --txt-2:            #6DCEFF;   /* plus vif, arc électrique */
+  --txt-3:            #4A6380;   /* légèrement plus lisible sur fond clair */
+  --txt-4:            #1E3050;
 
   /* ── Bordures ── */
-  --bdr:              rgba(14,165,233,0.10);
-  --bdr-elec:         rgba(14,165,233,0.40);
-  --bdr-strong:       rgba(56,189,248,0.50);
-  --bdr-cyan:         rgba(6,182,212,0.28);
+  --bdr:              rgba(27,159,232,0.14);
+  --bdr-elec:         rgba(27,159,232,0.50);
+  --bdr-strong:       rgba(66,189,255,0.65);
+  --bdr-cyan:         rgba(0,212,245,0.32);
 
   /* ── Typographie ── */
   --display:          'Bebas Neue', sans-serif;
@@ -63,45 +63,45 @@
   --nav-h:            60px;
   --transition:       0.16s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* ── Shadows & Glows ── */
-  --shadow:           0 8px 40px rgba(0,0,0,0.85);
-  --glow-elec:        0 0 28px rgba(14,165,233,0.35);
-  --glow-cyan:        0 0 24px rgba(6,182,212,0.28);
-  --glow-red:         0 0 24px rgba(220,38,38,0.28);
-  --glow-sm:          0 0 12px rgba(14,165,233,0.18);
-  --glow-gold:        0 0 24px rgba(217,119,6,0.30);
+  /* ── Shadows & Glows — intensifiés arc électrique ── */
+  --shadow:           0 8px 40px rgba(0,0,0,0.80);
+  --glow-elec:        0 0 32px rgba(27,159,232,0.55), 0 0 8px rgba(66,189,255,0.30);
+  --glow-cyan:        0 0 28px rgba(0,212,245,0.45);
+  --glow-red:         0 0 28px rgba(220,38,38,0.40);
+  --glow-sm:          0 0 14px rgba(27,159,232,0.28);
+  --glow-gold:        0 0 28px rgba(217,119,6,0.35);
 
   /* ── Aliases compatibilité ── */
-  --blue:             #0EA5E9;
-  --blue-light:       #38BDF8;
-  --blue-dark:        #0369A1;
-  --violet:           #0EA5E9;
-  --color-primary:    #0EA5E9;
+  --blue:             #1B9FE8;
+  --blue-light:       #42BDFF;
+  --blue-dark:        #0B5A8C;
+  --violet:           #1B9FE8;
+  --color-primary:    #1B9FE8;
   --color-secondary:  #DC2626;
-  --color-accent:     #06B6D4;
-  --color-tertiary:   #7DD3FC;
+  --color-accent:     #00D4F5;
+  --color-tertiary:   #90D9FF;
   --color-success:    #34D399;
-  --bg-base:          #06080F;
-  --bg-surface:       #0B0F1C;
-  --bg-card:          #0B0F1C;
-  --bg-card-hover:    #101828;
-  --text-primary:     #F0F9FF;
-  --text-secondary:   #7DD3FC;
-  --text-muted:       #475569;
-  --text-dim:         #0C1828;
-  --border:           rgba(14,165,233,0.10);
-  --border-strong:    rgba(14,165,233,0.40);
-  --shadow-blue:      0 0 28px rgba(14,165,233,0.35);
-  --shadow-red:       0 0 24px rgba(220,38,38,0.28);
-  --shadow-gold:      0 0 28px rgba(217,119,6,0.30);
-  --shadow-crimson:   0 0 24px rgba(220,38,38,0.28);
+  --bg-base:          #080D1A;
+  --bg-surface:       #0C1325;
+  --bg-card:          #0C1325;
+  --bg-card-hover:    #12203A;
+  --text-primary:     #EEF7FF;
+  --text-secondary:   #6DCEFF;
+  --text-muted:       #4A6380;
+  --text-dim:         #0E1E38;
+  --border:           rgba(27,159,232,0.14);
+  --border-strong:    rgba(27,159,232,0.50);
+  --shadow-blue:      0 0 32px rgba(27,159,232,0.55), 0 0 8px rgba(66,189,255,0.30);
+  --shadow-red:       0 0 28px rgba(220,38,38,0.40);
+  --shadow-gold:      0 0 28px rgba(217,119,6,0.35);
+  --shadow-crimson:   0 0 28px rgba(220,38,38,0.40);
   --crimson:          #DC2626;
   --crimson-light:    #F87171;
   --crimson-bright:   #FCA5A5;
-  --cream:            #E0F2FE;
-  --glass-bg:         #06080F;
-  --glass-border:     rgba(14,165,233,0.10);
-  --glass-inset:      inset 0 1px 0 rgba(56,189,248,0.05);
+  --cream:            #D6EFFF;
+  --glass-bg:         #080D1A;
+  --glass-border:     rgba(27,159,232,0.14);
+  --glass-inset:      inset 0 1px 0 rgba(66,189,255,0.07);
   --glass-blur:       blur(0px);
   --ease:             0.16s cubic-bezier(0.4,0,0.2,1);
   --bdr-gold:         rgba(217,119,6,0.40);
@@ -113,9 +113,14 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--body);
-  background: var(--bg);
-  background-image: radial-gradient(circle, rgba(14,165,233,0.032) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-color: var(--bg);
+  /* Grille étoilée + nébuleuse bleue */
+  background-image:
+    radial-gradient(circle, rgba(42,189,255,0.045) 1px, transparent 1px),
+    radial-gradient(ellipse 80% 55% at 50% -5%, rgba(27,159,232,0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 85%, rgba(0,212,245,0.045) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 15% 70%, rgba(27,80,180,0.06) 0%, transparent 55%);
+  background-size: 28px 28px, 100% 100%, 100% 100%, 100% 100%;
   background-attachment: fixed;
   color: var(--txt);
   min-height: 100vh;
@@ -126,26 +131,27 @@ body {
 
 /* ── Pas de grain / scanlines en V3 ── */
 
-/* ── Glow électrique centré haut ── */
+/* ── Arc électrique — halo central haut ── */
 body::after {
   content: '';
   position: fixed;
   top: 0; left: 50%;
   transform: translateX(-50%);
-  width: 75vw;
-  height: 50vh;
+  width: 90vw;
+  height: 60vh;
   background: radial-gradient(ellipse at 50% 0%,
-    rgba(14,165,233,0.07) 0%,
-    rgba(6,182,212,0.025) 45%,
-    transparent 72%);
+    rgba(27,159,232,0.13) 0%,
+    rgba(0,212,245,0.055) 35%,
+    rgba(27,80,180,0.03) 60%,
+    transparent 75%);
   pointer-events: none;
   z-index: 0;
 }
 
 #bg-canvas {
   position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; opacity: 0.35;
-  filter: hue-rotate(210deg) saturate(1.4) brightness(0.7);
+  pointer-events: none; opacity: 0.40;
+  filter: hue-rotate(195deg) saturate(1.6) brightness(0.75);
 }
 
 nav, header, main, section, footer, div, article {

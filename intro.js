@@ -8,7 +8,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #080C15;
+  background: #080D1A;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,8 @@
 #abs-intro-line {
   width: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #4A9FFF, #00C8FF, #4A9FFF, transparent);
+  background: linear-gradient(90deg, transparent, #1B9FE8, #AAEEFF, #00D4F5, #AAEEFF, #1B9FE8, transparent);
+  box-shadow: 0 0 8px rgba(0,212,245,0.8), 0 0 20px rgba(27,159,232,0.5);
   animation: lineGrow 0.55s cubic-bezier(0.4,0,0.2,1) 0.1s forwards;
   margin-bottom: 2.2rem;
   opacity: 0;
@@ -55,7 +56,7 @@
   font-weight: 600;
   letter-spacing: 0.55em;
   text-transform: uppercase;
-  color: #4A9FFF;
+  color: #42BDFF;
   opacity: 0;
   margin-top: 1rem;
   padding-right: 0.55em;
