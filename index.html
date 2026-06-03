@@ -39,34 +39,54 @@
 <section class="hero">
   <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-inner">
-    <div class="hero-top-row fi">
-      <div class="hero-game">
-        <span class="g-wow" data-game="wow">&#9876;&#65039; World of Warcraft</span>
-        <span class="g-dot" id="hero-dot-sep"></span>
-        <span class="g-swt" data-game="swtor">&#128640; SWTOR</span>
+
+    <!-- Ligne animée -->
+    <div class="hero-rule"></div>
+
+    <!-- Identité -->
+    <div class="hero-identity fi">
+      <span class="h-tag">Guilde</span>
+      <span class="h-sep">&middot;</span>
+      <span class="h-tag">Semi-Hardcore</span>
+      <span class="h-sep">&middot;</span>
+      <span class="h-tag">Francophone</span>
+      <span class="h-sep">&middot;</span>
+      <span class="h-tag">PvE</span>
+    </div>
+
+    <!-- Jeux -->
+    <div class="hero-games-row fi d1">
+      <div class="hg-item wow" data-game="wow">
+        <span class="hg-label">World of Warcraft</span>
+        <span class="hg-sub">Raids Mythic &amp; Mythic+</span>
       </div>
-      <div class="hero-eye" id="recruit-status">
-        <span class="hero-eye-badge" id="recruit-wow" data-game="wow" style="display:none;">
-          <span class="hero-eye-dot" id="dot-wow"></span>
-          <span id="label-wow">WoW &mdash; Recrutement ouvert</span>
-        </span>
-        <span class="hero-eye-badge" id="recruit-swtor" data-game="swtor" style="display:none;">
-          <span class="hero-eye-dot" id="dot-swtor"></span>
-          <span id="label-swtor">SWTOR &mdash; Recrutement ouvert</span>
-        </span>
+      <div class="hg-divider" id="hero-dot-sep"></div>
+      <div class="hg-item swtor" data-game="swtor">
+        <span class="hg-label">Star Wars : TOR</span>
+        <span class="hg-sub">Op&eacute;rations NiM</span>
       </div>
     </div>
-    <div class="hero-manifesto">
-      <div class="hm-line fi d1">On progresse</div>
-      <div class="hm-line hm-accent fi d2">ensemble.</div>
+
+    <!-- Recrutement -->
+    <div class="hero-eye fi d2" id="recruit-status">
+      <span class="hero-eye-badge" id="recruit-wow" data-game="wow" style="display:none;">
+        <span class="hero-eye-dot" id="dot-wow"></span>
+        <span id="label-wow">WoW &mdash; Recrutement ouvert</span>
+      </span>
+      <span class="hero-eye-badge" id="recruit-swtor" data-game="swtor" style="display:none;">
+        <span class="hero-eye-dot" id="dot-swtor"></span>
+        <span id="label-swtor">SWTOR &mdash; Recrutement ouvert</span>
+      </span>
     </div>
-    <p class="hero-desc fi d3" data-eid="hero-desc">
-      Guilde semi-hardcore francophone. Z&eacute;ro toxicit&eacute;,<br>cent pour cent investissement.
-    </p>
+
+    <!-- Ligne basse + CTA -->
+    <div class="hero-rule hero-rule-b fi d3"></div>
     <div class="hero-btns fi d4">
       <button class="btn btn-primary" onclick="document.getElementById('modal-postuler').style.display='flex'">Postuler &rarr;</button>
-      <a href="roster.html" class="btn btn-secondary">Voir le roster</a>
+      <a href="roster.html" class="btn btn-ghost">Voir le roster</a>
+      <a href="https://discord.gg/ANEeFgfP8x" target="_blank" rel="noopener" class="btn btn-ghost">Discord</a>
     </div>
+
   </div>
 </section>
 
